@@ -1,21 +1,32 @@
-.itemDate {
-    color: #000;
+.timelinecontainer {
+    :global(> .itemdate) {
+        color: #000;
+        padding-top:0;
+        font-size:25px;
+    }
+}
+    
+
+
+
+.importantvalue {
+    font-weight: bolder;
+    font-size:40px;
+    color:#febd69;
 }
 
+.mainBlockContainer {
+    min-width: 850px;
+    margin-top: 2em;
 
-.test {
-    background: #f00;
-
-    .vertical-timeline-element-content {
-        background: green ;
+    .columnitem{
+        font-family: Montserrat;
+        font-weight: bolder;
+        border: 4px solid #febd69;
+        border-radius: 20px;
+        margin: 0 10px;
+        text-align: center;
+        background-color: #fbebbc;
+        padding:10px;    
     }
-    .vertical-timeline-element-date {
-        color: green;
-    }
-
-    h4 {
-        color: green;
-    }
-
-    
 }

@@ -1,4 +1,7 @@
+import 'bulma/css/bulma.min.css';
+
 import '../styles/globals.css'
+import '../styles/fonts.css'
 import { useState } from "react";
 import type { AppProps } from 'next/app'
 import { GlobalContext } from "../context";

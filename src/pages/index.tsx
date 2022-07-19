@@ -5,6 +5,7 @@ import styles from '../styles/Home.module.css'
 
 import ConnectButton  from '../components/ConnectButton'
 import MainContent  from '../components/MainContent'
+import IntroText  from '../components/IntroText'
 
 import { getNFTData } from '../lib/getNFTData'
 
@@ -78,11 +79,7 @@ const Home: NextPage = (props) => {
       </Head>
 
       <main className={styles.main}>
-        <ConnectButton />
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
+      <IntroText />
        <MainContent balance={props.balance} time={props.time} NFTData={props.NFTData} total={props.total}/>
               
       </main>

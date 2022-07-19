@@ -1,0 +1,35 @@
+.introContainer {
+
+    max-width: 850px;
+    h2 {
+        font-size: 30px;
+        font-weight: bolder;
+        color: #febd69;
+    }
+    hr {
+        background-color: #febd69;
+        height:2px;
+        border:none;
+        
+    }
+
+
+    :global(.columnitem){
+        font-family: Montserrat;
+        font-weight: bolder;
+        // border: 4px solid #febd69;
+        border-radius: 20px;
+        margin: 0 10px;
+        text-align: center;
+        background-color: #fbebbc;
+        padding:10px;    
+    }
+
+    .introDescription {
+        margin: .5rem !important;
+        color:#84776b;
+        p {
+            margin:0.5em;
+        }
+    }
+}

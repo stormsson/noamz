@@ -40,6 +40,20 @@ import 'react-vertical-timeline-component/style.min.css';
 //   }
   
 
+const formatDate = (formattedDate: Date) => {
+
+    const monthNames = [
+        "January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+    ];  
+
+
+    return formattedDate.getDate() +" / "
+        + monthNames[formattedDate.getMonth()]
+
+
+}
+
 const MainContent = (props) => {
     // const provider = new ethers.providers.AlchemyProvider("ropsten");
 
@@ -50,41 +64,70 @@ const MainContent = (props) => {
      const balance_euro = (props.balance/100).toFixed(2);
      const total_euro = (props.total/100).toFixed(2);
 
+     const nft_amount = props.NFTData.nfts.length;
+
+     const last_datetime = props.NFTData.nfts[0].timeLastUpdated;
+     const formattedDate = formatDate(new Date(last_datetime))
+     
+
+
 
 
 
     return (
-        <div>
-            <div>Sono il main content</div>
-            
-            <div>time è: {props.time}  </div>
-            <div>balance è: {balance_euro}  </div>
-            <div>total è: {total_euro}  </div>
+        <div class="container mt-2">
+            <div className={styles.mainBlockContainer}>
 
-
-            <VerticalTimeline lineColor="#febd69">
-
-                {props.NFTData.nfts.map((el, index) => 
-                    <VerticalTimelineElement
-                    key={index}
-                    className="test"
-                    //  className={styles.test}
-                    // contentStyle={{ background: 'rgb(33, 150, 243);'}}
-                    contentArrowStyle={{ borderRight: '7px solid  rgb(33, 150, 243)' }}
-                    date={el.timeLastUpdated}
-                    iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
-                    dateClassName="itemDate"                
-                >
-                    <h3 className="vertical-timeline-element-title"> {parseFloat(el.metadata.attributes[0].value).toFixed(2)}</h3>
-                    <h4 className="vertical-timeline-element-subtitle">{el.title}</h4>
-                    <div> 
-                        {el.description}
+                <div class="columns block">
+                    <div class="column is-one-third">
+                        <div className={styles.columnitem}>
+                            I avoided Jeff's store <div className={styles.importantvalue}>{nft_amount} times</div>
+                        </div>
                     </div>
-                </VerticalTimelineElement>
-                )}
-               
+                    <div class="column  is-one-third">
+                        <div className={styles.columnitem}>
+                            I didn't give Jeff <div className={styles.importantvalue}>{total_euro} €</div>
+                        </div>
 
-            </VerticalTimeline>
+                    </div>
+                    <div class="column  is-one-third">
+                        <div className={styles.columnitem}>
+                            Last time 
+                            <div className={styles.importantvalue}>{formattedDate}</div>
+                        </div>
+
+                    </div>                
+                </div>
+            </div>
+        
+            
+            <div class="block timelinecontainer">
+                <VerticalTimeline lineColor="#febd69">
+
+                    {props.NFTData.nfts.map((el, index) => 
+                        <VerticalTimelineElement
+                            key={index}
+                            className="test"
+                            //  className={styles.test}
+                            // contentStyle={{ background: 'rgb(33, 150, 243);'}}
+                            contentArrowStyle={{ borderRight: '7px solid  #fff' }}
+                            date={formatDate(new Date(el.timeLastUpdated))}
+                            iconStyle={{ background: '#fbebbc', color: '#febd69' }}
+                            dateClassName="itemdate"                
+                        >
+                            <h3 className="vertical-timeline-element-title"> {parseFloat(el.metadata.attributes[0].value).toFixed(2)}</h3>
+                            <h4 className="vertical-timeline-element-subtitle">{el.title}</h4>
+                            <div> 
+                                {el.description}
+                            </div>
+                            
+                        </VerticalTimelineElement>
+                    )}
+                
+
+                </VerticalTimeline>
+            </div>
+
         </div>
     )
 };
