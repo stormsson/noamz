@@ -1,15 +1,16 @@
 import styles from "./IntroText.module.scss";
 import { GlobalContext } from "../../context";
 import { useState , useContext } from "react";
+import { AppProps } from "next/app";
 
 
 
 
 const IntroText = (props) => {
     
-    const [activeModal, setActiveModal ] = useState(["is-active"]);
+    const [activeModal, setActiveModal ] = useState("is-active");
 
-    const toggleModal = (event) => {
+    const toggleModal = (event: any) => {
         event.stopPropagation();
         
         if(activeModal == "") {
@@ -24,8 +25,8 @@ const IntroText = (props) => {
     return (
         <div className={styles.introContainer}>
 
-            <div class="block columns m-2">            
-                <div class="column columnitem">
+            <div className={"block columns m-2"}>            
+                <div className={"column columnitem"}>
                     <h2>What is this ?</h2>
                     <div className={styles.introDescription}>
                         <p><strong>NoAMZ</strong> is my personal project to track the money I choose to not give to <strong>Lex Luthor</strong>.</p>
@@ -36,7 +37,7 @@ const IntroText = (props) => {
                     </div>
 
                     <div className={"columns "+styles.columns}>
-                        <div class="column">
+                        <div className={"column"}>
                             <a href="#" onClick={toggleModal}>FAQ</a>
                         </div>
                         
@@ -48,13 +49,13 @@ const IntroText = (props) => {
 
             </div>
             <div className={"modal " + activeModal}>
-                <div class="modal-background"></div>
-                <div class="modal-card">
-                    <header class="modal-card-head">
-                        <p class="modal-card-title">FAQ</p>
-                        <button class="delete" onClick={toggleModal} aria-label="close"></button>
+                <div className={"modal-background"}></div>
+                <div className={"modal-card"}>
+                    <header className={"modal-card-head"}>
+                        <p className={"modal-card-title"}>FAQ</p>
+                        <button className={"delete"} onClick={toggleModal} aria-label="close"></button>
                     </header>
-                    <section class="modal-card-body">
+                    <section className={"modal-card-body"}>
                         <strong>How does this work?</strong>
                         <p>There is a smart contract somewhere where I save the informations for a future purpose.</p>
                         <p>Periodically the page updates and the new values are shown.</p>
@@ -82,8 +83,8 @@ const IntroText = (props) => {
                         <p>At the moment I don't have many features to work on; feel free to contact me if you have suggestions!</p>
                         <p>Donate if you feel and can: I guarantee that 100% of donations will not go to Lex Luthor and his organization.</p>
                     </section>
-                    <footer class="modal-card-foot">
-                        <button class="button">Donate</button>
+                    <footer className={"modal-card-foot"}>
+                        <button className={"button"}>Donate</button>
                     </footer>
                 </div>
             </div>

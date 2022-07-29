@@ -3,9 +3,16 @@ import { GlobalContext } from "../../context";
 import { useState , useContext } from "react";
 
 
+import { IMainContentProps } from "../../types/Props";
 
+
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 import { VerticalTimeline, VerticalTimelineElement }  from 'react-vertical-timeline-component';
 import 'react-vertical-timeline-component/style.min.css';
+import { AppProps } from "next/app";
+
+
 
 
 // const { ethers } = require("ethers");
@@ -28,12 +35,12 @@ import 'react-vertical-timeline-component/style.min.css';
 //     const contract = new ethers.Contract(contractAddress, contractABI, provider);
 
 
-//     const CRISTO = await contract.balanceOf("0x2b9717ccd4B5d2562eE04D587b8D6048DD6f6A00");
-//     console.log("CRISTO: ", CRISTO);
+//     const ASD = await contract.balanceOf("0x2b9717ccd4B5d2562eE04D587b8D6048DD6f6A00");
+//     console.log("ASD: ", ASD);
 
 //     return {
 //       props: {
-//         'balance': CRISTO,
+//         'balance': ASD,
 //       }, // will be passed to the page component as props
 //       revalidate: 10, // seconds
 //     }
@@ -54,12 +61,12 @@ const formatDate = (formattedDate: Date) => {
 
 }
 
-const MainContent = (props) => {
+const MainContent = (props: IMainContentProps) => {
     // const provider = new ethers.providers.AlchemyProvider("ropsten");
 
     // const {wallet, setWallet, signer} = useContext(GlobalContext)
 
-     console.log(props)
+    //  console.log(props)
 
      const balance_euro = (props.balance/100).toFixed(2);
      const total_euro = (props.total/100).toFixed(2);
@@ -75,22 +82,22 @@ const MainContent = (props) => {
 
 
     return (
-        <div class="container mt-2">
+        <div className={"container mt-2"}>
             <div className={styles.mainBlockContainer}>
 
-                <div class="columns block">
-                    <div class="column is-one-third">
+                <div className={"columns block"}>
+                    <div className={"column is-one-third"}>
                         <div className={styles.columnitem}>
                             I avoided Jeff's store <div className={styles.importantvalue}>{nft_amount} times</div>
                         </div>
                     </div>
-                    <div class="column  is-one-third">
+                    <div className={"column  is-one-third"}>
                         <div className={styles.columnitem}>
                             I didn't give Jeff <div className={styles.importantvalue}>{total_euro} €</div>
                         </div>
 
                     </div>
-                    <div class="column  is-one-third">
+                    <div className={"column  is-one-third"}>
                         <div className={styles.columnitem}>
                             Last time 
                             <div className={styles.importantvalue}>{formattedDate}</div>
@@ -101,10 +108,10 @@ const MainContent = (props) => {
             </div>
         
             
-            <div class="block timelinecontainer">
+            <div className={"block timelinecontainer"}>
                 <VerticalTimeline lineColor="#febd69">
 
-                    {props.NFTData.nfts.map((el, index) => 
+                    {props.NFTData.nfts.map((el: any, index: number) => 
                         <VerticalTimelineElement
                             key={index}
                             className="test"

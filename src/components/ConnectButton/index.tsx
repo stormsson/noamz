@@ -16,7 +16,7 @@ const providerOptions = {
 };
 
 const ConnectButton = () => {
-  let web3Modal;
+  let web3Modal:any;
   
 
   let instance;
@@ -48,7 +48,7 @@ const ConnectButton = () => {
 
   const disconnectWallet = async () => {
     await web3Modal.clearCachedProvider();
-    setAccountNumber(null);
+    setAccountNumber("");
     setWallet({})
     setSigner({})
   };
@@ -69,7 +69,7 @@ const ConnectButton = () => {
     // });
   };
 
-  const [accountNumber, setAccountNumber] = useState(null);
+  const [accountNumber, setAccountNumber] = useState("");
 
   useEffect(() => {
     web3Modal = new Web3Modal({

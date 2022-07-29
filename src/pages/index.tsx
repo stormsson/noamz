@@ -8,6 +8,7 @@ import MainContent  from '../components/MainContent'
 import IntroText  from '../components/IntroText'
 
 import { getNFTData } from '../lib/getNFTData'
+import { IMainContentProps } from '../types/Props'
 
 const { ethers } = require("ethers");
 
@@ -65,7 +66,7 @@ export async function getStaticProps(context) {
 
 }
 
-const Home: NextPage = (props) => {
+const Home: NextPage<IMainContentProps> = (props) => {
 
   
 
