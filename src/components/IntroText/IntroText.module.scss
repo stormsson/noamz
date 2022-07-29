@@ -10,7 +10,13 @@
         background-color: #febd69;
         height:2px;
         border:none;
+        margin:0;
         
+    }
+
+    strong {
+        color: #febd69;
+        font-weight: 900;
     }
 
 
@@ -25,11 +31,34 @@
         padding:10px;    
     }
 
+    .columns {
+        margin:0;
+    }
     .introDescription {
         margin: .5rem !important;
         color:#84776b;
         p {
             margin:0.5em;
         }
+
+    }
+
+    :global(.modal) {
+        hr {
+            height:1px;
+            border:none;   
+            width:50px;
+        }
+
+        .level, .level-item {
+            height:2em;
+            margin:0;
+        }
+
+        p {
+            padding-left:15px;
+        }
     }
 }
+
+
