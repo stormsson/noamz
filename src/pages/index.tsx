@@ -7,7 +7,7 @@ import ConnectButton  from '../components/ConnectButton'
 import MainContent  from '../components/MainContent'
 import IntroText  from '../components/IntroText'
 
-import { getNFTData } from '../lib/getNFTData'
+import { getNFTData, getNFTOwners } from '../lib/getNFTData'
 import { IMainContentProps } from '../types/Props'
 
 const { ethers } = require("ethers");
@@ -32,6 +32,7 @@ export async function getStaticProps(context) {
     "function countTransactions(address a) public view returns(uint256)",
     "function addTransaction(address sender, uint256 amount) external ",
     "function total() public view returns(uint256)",
+    "function transactionCountPerUser(address a) public view returns(uint256)",
 ]
 
   const ERC721Contract = new ethers.Contract(process.env.CONTRACT_ADDRESS, ERC721ABI, provider)
@@ -41,18 +42,39 @@ export async function getStaticProps(context) {
 
 
 
-  const MyBalance = await BMContract.balanceOf("0x2b9717ccd4B5d2562eE04D587b8D6048DD6f6A00");
+  const MyBalance = await BMContract.balanceOf(process.env.MY_ADDRESS);
   const BMTotal = await BMContract.total();
+  const txCount = await BMContract.transactionCountPerUser(process.env.MY_ADDRESS);
 
-  console.log("MyBalance: ", MyBalance.toString(),"TOTAL: ", BMTotal);
+  // console.log("TXC ",txCount)
+  // console.log("MyBalance: ", MyBalance.toString(),"TOTAL: ", BMTotal);
 
   let currentDate = new Date();
   let time = currentDate.getHours() + ":" + currentDate.getMinutes() + ":" + currentDate.getSeconds();
-  console.log(time);
+
 
 
   let NFTData = await getNFTData();
-  console.log(NFTData);
+  let NFTOwners = await getNFTOwners();
+  const burntTokens = NFTOwners.ownerAddresses.filter((i)=>{
+    return i.ownerAddress == "0x0000000000000000000000000000000000000000"
+  }) 
+
+  let burntTokenIds = {}
+  if(burntTokens.length>0) {
+    burntTokens[0].tokenBalances.map((el)=> {
+      burntTokenIds[el.tokenId] = true;
+    })
+  }
+
+  let tmp = NFTData.nfts.filter((i) => { return (!('error' in i))  });
+  tmp = tmp.filter((i)=> {
+    const tokenId = i.id.tokenId;
+    return (!(tokenId in burntTokenIds));
+  })
+  NFTData.nfts = tmp;
+  // console.log(tmp);
+
 
   return {
     props: {

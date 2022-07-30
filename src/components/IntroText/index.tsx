@@ -8,7 +8,7 @@ import { AppProps } from "next/app";
 
 const IntroText = (props) => {
     
-    const [activeModal, setActiveModal ] = useState("is-active");
+    const [activeModal, setActiveModal ] = useState("");
 
     const toggleModal = (event: any) => {
         event.stopPropagation();

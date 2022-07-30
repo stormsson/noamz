@@ -66,7 +66,6 @@ const MainContent = (props: IMainContentProps) => {
 
     // const {wallet, setWallet, signer} = useContext(GlobalContext)
 
-    //  console.log(props)
 
      const balance_euro = (props.balance/100).toFixed(2);
      const total_euro = (props.total/100).toFixed(2);
@@ -76,9 +75,6 @@ const MainContent = (props: IMainContentProps) => {
      const last_datetime = props.NFTData.nfts[0].timeLastUpdated;
      const formattedDate = formatDate(new Date(last_datetime))
      
-
-
-
 
 
     return (
@@ -122,7 +118,7 @@ const MainContent = (props: IMainContentProps) => {
                             iconStyle={{ background: '#fbebbc', color: '#febd69' }}
                             dateClassName="itemdate"                
                         >
-                            <h3 className="vertical-timeline-element-title"> {parseFloat(el.metadata.attributes[0].value).toFixed(2)}</h3>
+                            <h3 className="vertical-timeline-element-title"> {(parseFloat(el.metadata.attributes[0].value)/100).toFixed(2)}</h3>
                             <h4 className="vertical-timeline-element-subtitle">{el.title}</h4>
                             <div> 
                                 {el.description}
