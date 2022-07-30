@@ -118,7 +118,7 @@ const MainContent = (props: IMainContentProps) => {
                             iconStyle={{ background: '#fbebbc', color: '#febd69' }}
                             dateClassName="itemdate"                
                         >
-                            <h3 className="vertical-timeline-element-title"> {(parseFloat(el.metadata.attributes[0].value)/100).toFixed(2)}</h3>
+                            <h3 className={"vertical-timeline-element-title "+styles.itemPrice}> {(parseFloat(el.metadata.attributes[0].value)/100).toFixed(2)} &euro;</h3>
                             <h4 className="vertical-timeline-element-subtitle">{el.title}</h4>
                             <div> 
                                 {el.description}
