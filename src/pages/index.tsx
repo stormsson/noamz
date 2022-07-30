@@ -9,6 +9,7 @@ import IntroText  from '../components/IntroText'
 
 import { getNFTData, getNFTOwners } from '../lib/getNFTData'
 import { IMainContentProps } from '../types/Props'
+import { timeStamp } from 'console'
 
 const { ethers } = require("ethers");
 
@@ -81,14 +82,14 @@ export async function getStaticProps(context) {
       'time' : time,
       NFTData
     }, // will be passed to the page component as props
-    revalidate: 30, // seconds
+    revalidate: 3600, // seconds
   }
 
 }
 
 const Home: NextPage<IMainContentProps> = (props) => {
 
-  
+  console.log("Last Revalidation: ",props.time);
 
 
   return (

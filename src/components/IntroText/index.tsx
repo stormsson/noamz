@@ -80,11 +80,12 @@ const IntroText = (props) => {
                                 </div>
                             </nav>
                         <strong>Can I Help?</strong>
-                        <p>At the moment I don't have many features to work on; feel free to contact me if you have suggestions!</p>
-                        <p>Donate if you feel and can: I guarantee that 100% of donations will not go to Lex Luthor and his organization.</p>
+                        <p>At the moment I don't have many features to work on; feel free to <strong>
+                                <a href="https://twitter.com/stormsson/">contact me</a>
+                            </strong> if you have suggestions!</p>
                     </section>
                     <footer className={"modal-card-foot"}>
-                        <button className={"button"}>Donate</button>
+
                     </footer>
                 </div>
             </div>
