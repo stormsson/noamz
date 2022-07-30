@@ -40,8 +40,6 @@ export async function getStaticProps(context) {
   const BMAddress = await ERC721Contract.BM();
   const BMContract = new ethers.Contract(BMAddress, BalanceManagerABI, provider);
 
-
-
   const MyBalance = await BMContract.balanceOf(process.env.MY_ADDRESS);
   const BMTotal = await BMContract.total();
   const txCount = await BMContract.transactionCountPerUser(process.env.MY_ADDRESS);
