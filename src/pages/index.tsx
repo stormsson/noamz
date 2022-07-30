@@ -59,20 +59,27 @@ export async function getStaticProps(context) {
     return i.ownerAddress == "0x0000000000000000000000000000000000000000"
   }) 
 
+  // console.log("AA",burntTokens)
+  // console.log(burntTokens[0].tokenBalances)
+
   let burntTokenIds = {}
   if(burntTokens.length>0) {
     burntTokens[0].tokenBalances.map((el)=> {
-      burntTokenIds[el.tokenId] = true;
+      if(el.balance > 0) {
+        burntTokenIds[el.tokenId] = true;
+      }
     })
   }
 
   let tmp = NFTData.nfts.filter((i) => { return (!('error' in i))  });
+
   tmp = tmp.filter((i)=> {
     const tokenId = i.id.tokenId;
     return (!(tokenId in burntTokenIds));
   })
+  // console.log("POST ",tmp);
   NFTData.nfts = tmp;
-  // console.log(tmp);
+  // console.log(NFTData);
 
 
   return {

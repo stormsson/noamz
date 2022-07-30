@@ -16,7 +16,6 @@ export async function getNFTData() {
 }
 
 export async function getNFTOwners() {
-
     const url = `${process.env.ALCHEMY_BASEURL}/getOwnersForCollection?` + new URLSearchParams({
         contractAddress:`${process.env.CONTRACT_ADDRESS}`,
         withTokenBalances:"true"
@@ -28,5 +27,6 @@ export async function getNFTOwners() {
     catch (error: any) {
         console.log(error);
     }
+    // console.log("BURNT: ",data)
     return data;
 }

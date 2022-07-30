@@ -107,7 +107,7 @@ const MainContent = (props: IMainContentProps) => {
             <div className={"block timelinecontainer"}>
                 <VerticalTimeline lineColor="#febd69">
 
-                    {props.NFTData.nfts.map((el: any, index: number) => 
+                    {props.NFTData.nfts.slice(0).reverse().map((el: any, index: number) => 
                         <VerticalTimelineElement
                             key={index}
                             className="test"
