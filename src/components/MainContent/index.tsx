@@ -78,7 +78,7 @@ const MainContent = (props: IMainContentProps) => {
 
 
     return (
-        <div className={"container mt-2"}>
+        <div className={"container mt-2 "+styles.megaContainer} >
             <div className={styles.mainBlockContainer}>
 
                 <div className={"columns block"}>
