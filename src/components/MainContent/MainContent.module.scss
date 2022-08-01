@@ -14,8 +14,6 @@
     font-weight: 800;
     font-size:22px;
 }
-    
-
 
 
 .importantvalue {
@@ -24,8 +22,12 @@
     color:#febd69;
 }
 
+.megaContainer {
+    width:65%;
+}
+
 .mainBlockContainer {
-    min-width: 850px;
+    min-width: 50%;
     margin-top: 2em;
 
     .columnitem{
