@@ -114,7 +114,7 @@ const MainContent = (props: IMainContentProps) => {
                             //  className={styles.test}
                             // contentStyle={{ background: 'rgb(33, 150, 243);'}}
                             contentArrowStyle={{ borderRight: '7px solid  #fff' }}
-                            date={formatDate(new Date(el.timeLastUpdated))}
+                            // date={formatDate(new Date(el.timeLastUpdated))}
                             iconStyle={{ background: '#fbebbc', color: '#febd69' }}
                             dateClassName="itemdate"                
                         >
