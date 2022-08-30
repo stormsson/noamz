@@ -14,6 +14,12 @@ import { timeStamp } from 'console'
 const { ethers } = require("ethers");
 
 
+const getTxEvents = async (contract, address) => {
+  const result = await contract.filters.Transaction(address);
+  console.log(result);
+  return result;
+}
+
 export async function getStaticProps(context) {
 
   const ALCHEMY_API_KEY = process.env.ALCHEMY_API_KEY;
@@ -34,16 +40,20 @@ export async function getStaticProps(context) {
     "function addTransaction(address sender, uint256 amount) external ",
     "function total() public view returns(uint256)",
     "function transactionCountPerUser(address a) public view returns(uint256)",
-]
+    "event Transaction(address indexed, uint256 amount, uint256 newTotal)",  
+  ]
 
+  
   const ERC721Contract = new ethers.Contract(process.env.CONTRACT_ADDRESS, ERC721ABI, provider)
-
+  
   const BMAddress = await ERC721Contract.BM();
   const BMContract = new ethers.Contract(BMAddress, BalanceManagerABI, provider);
-
+  
   const MyBalance = await BMContract.balanceOf(process.env.MY_ADDRESS);
   const BMTotal = await BMContract.total();
-  const txCount = await BMContract.transactionCountPerUser(process.env.MY_ADDRESS);
+  const TXEvents = await getTxEvents(BMContract, myAddress)
+
+  // const txCount = await BMContract.transactionCountPerUser(process.env.MY_ADDRESS);
 
   // console.log("TXC ",txCount)
   // console.log("MyBalance: ", MyBalance.toString(),"TOTAL: ", BMTotal);
