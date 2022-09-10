@@ -1,6 +1,6 @@
 name: data
 env:
-  ALCHEMY_BASE_URL: ${{secrets.ALCHEMY_BASE_URL}}
+  ALCHEMY_BASEURL: ${{secrets.ALCHEMY_BASEURL}}
   CONTRACT_ADDRESS: ${{secrets.CONTRACT_ADDRESS}}
 on:
   schedule:
@@ -27,7 +27,7 @@ jobs:
       - name: Fetch data
         uses: githubocto/flat@v3
         with:
-          http_url: $ALCHEMY_BASE_URL/getNFTsForCollection?contractAddress=$CONTRACT_ADDRESS&startToken=0&withMetadata=false
+          http_url: $ALCHEMY_BASEURL/getNFTsForCollection?contractAddress=$CONTRACT_ADDRESS&startToken=0&withMetadata=false
           downloaded_filename: data/nftList.json
           postprocess: ./data/postprocess.js
-          mask: '["$ALCHEMY_BASE_URL"]'
+          mask: '["$ALCHEMY_BASEURL"]'
