@@ -16,7 +16,7 @@ on:
 jobs:
   scheduled:
     environment: Production
-    env:
+    #env:
       # ALCHEMY_BASEURL: ${{secrets.ALCHEMY_BASEURL}}
       # CONTRACT_ADDRESS: ${{secrets.CONTRACT_ADDRESS}}
     runs-on: ubuntu-latest
