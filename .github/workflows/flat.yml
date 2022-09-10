@@ -17,8 +17,8 @@ jobs:
   scheduled:
     environment: Production
     env:
-      ALCHEMY_BASEURL: ${{secrets.ALCHEMY_BASEURL}}
-      CONTRACT_ADDRESS: ${{secrets.CONTRACT_ADDRESS}}
+      # ALCHEMY_BASEURL: ${{secrets.ALCHEMY_BASEURL}}
+      # CONTRACT_ADDRESS: ${{secrets.CONTRACT_ADDRESS}}
     runs-on: ubuntu-latest
     steps:
       - name: Setup deno
@@ -30,7 +30,7 @@ jobs:
       - name: Fetch data
         uses: githubocto/flat@v3
         with:
-          http_url: $ALCHEMY_BASEURL/getNFTsForCollection?contractAddress=$CONTRACT_ADDRESS&startToken=0&withMetadata=false
+          http_url: ${{secrets.ALCHEMY_BASEURL}}/getNFTsForCollection?contractAddress=${{secrets.CONTRACT_ADDRESS}}&startToken=0&withMetadata=false
           downloaded_filename: data/nftList.json
           postprocess: ./data/postprocess.js
-          mask: '["$ALCHEMY_BASEURL"]'
+          mask: '["${{secrets.ALCHEMY_BASEURL}}"]'
