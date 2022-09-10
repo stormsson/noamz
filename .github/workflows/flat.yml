@@ -1,6 +1,4 @@
 name: data
-env:
-  CONTRACT_ADDRESS: ${{env.CONTRACT_ADDRESS}}
 on:
   schedule:
     - cron: 0 * * * *
