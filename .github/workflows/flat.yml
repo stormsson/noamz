@@ -8,6 +8,9 @@ on:
       - main
       - dev
       - flat-data
+    paths:
+      - .github/workflows/flat.yml
+      - ./data/postprocess.js
 jobs:
   scheduled:
     runs-on: ubuntu-latest
@@ -23,3 +26,5 @@ jobs:
         with:
           http_url: ${{secrets.ALCHEMY_BASE_URL}}/getNFTsForCollection?contractAddress=${{secrets.CONTRACT_ADDRESS}}&startToken=0&withMetadata=false
           downloaded_filename: data/nftList.json
+          postprocess: ./data/postprocess.js
+          mask: '["${{ secrets.ALCHEMY_BASE_URL }}"]'
