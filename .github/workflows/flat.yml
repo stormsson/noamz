@@ -1,7 +1,6 @@
 name: data
-env:
-  ALCHEMY_BASEURL: ${{secrets.ALCHEMY_BASEURL}}
-  CONTRACT_ADDRESS: ${{secrets.CONTRACT_ADDRESS}}
+
+
 on:
   schedule:
     - cron: 0 * * * *
@@ -16,6 +15,10 @@ on:
       - ./data/postprocess.js
 jobs:
   scheduled:
+    environment: Production
+    env:
+      ALCHEMY_BASEURL: ${{secrets.ALCHEMY_BASEURL}}
+      CONTRACT_ADDRESS: ${{secrets.CONTRACT_ADDRESS}}
     runs-on: ubuntu-latest
     steps:
       - name: Setup deno
