@@ -8,7 +8,7 @@ const savedMetadata = await readJSON('data/metadata.json')
 const tokenIdsToRefetch = [];
 data.nfts.forEach(element => {
     const tokenId = element.id.tokenId;    
-    console.log(tokenId," ==> ",element.error? element.error: "OK")    
+    // console.log(tokenId," ==> ",element.error? element.error: "OK")    
     if(savedMetadata.nft_metadata[tokenId] === undefined) {
         if(!element.error) {
             savedMetadata.nft_metadata[tokenId] =  element.metadata;
@@ -26,11 +26,20 @@ for (let i = 0; i < tokenIdsToRefetch.length; i++) {
             +"&tokenId="+tokenId
             +"&tokenUriTimeoutInMs=0";
             
-    console.log("I would fetch:  ",fetchUrl)
+    // console.log("I would fetch:  ",fetchUrl)
     const response = await fetch(fetchUrl);
     const element = await response.json();
     savedMetadata.nft_metadata[tokenId] =  element.metadata;
 }
+
+const ordered = Object.keys(savedMetadata.nft_metadata).sort().reduce(
+    (obj, key) => { 
+      obj[key] = savedMetadata.nft_metadata[key]; 
+      return obj;
+    }, 
+    {}
+);
+savedMetadata.nft_metadata = ordered;
 
 
 // console.log(config);
