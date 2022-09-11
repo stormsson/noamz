@@ -15,6 +15,9 @@ jobs:
   scheduled:
     environment: Production
     runs-on: ubuntu-latest
+    env:
+      ALCHEMY_BASEURL: ${{secrets.ALCHEMY_BASEURL}}
+      CONTRACT_ADDRESS: ${{secrets.CONTRACT_ADDRESS}}
     steps:
       - name: Setup deno
         uses: denoland/setup-deno@main

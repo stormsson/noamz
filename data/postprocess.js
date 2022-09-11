@@ -26,10 +26,10 @@ for (let i = 0; i < tokenIdsToRefetch.length; i++) {
             +"&tokenId="+tokenId
             +"&tokenUriTimeoutInMs=0";
             
-    console.log("fetching ",fetchUrl)
-    const response = await fetch(fetchUrl);
-    const element = await response.json();
-    savedMetadata.nft_metadata[tokenId] =  element.metadata;
+    console.log("I would fetch:  ",fetchUrl)
+    // const response = await fetch(fetchUrl);
+    // const element = await response.json();
+    // savedMetadata.nft_metadata[tokenId] =  element.metadata;
 }
 
 
