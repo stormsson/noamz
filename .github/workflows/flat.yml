@@ -1,6 +1,4 @@
 name: data
-
-
 on:
   schedule:
     - cron: 0 * * * *
@@ -12,13 +10,10 @@ on:
       - flat-data
     paths:
       - .github/workflows/flat.yml
-      - ./data/postprocess.js
+      - data/postprocess.js
 jobs:
   scheduled:
     environment: Production
-    #env:
-      # ALCHEMY_BASEURL: ${{secrets.ALCHEMY_BASEURL}}
-      # CONTRACT_ADDRESS: ${{secrets.CONTRACT_ADDRESS}}
     runs-on: ubuntu-latest
     steps:
       - name: Setup deno
@@ -30,7 +25,7 @@ jobs:
       - name: Fetch data
         uses: githubocto/flat@v3
         with:
-          http_url: ${{secrets.ALCHEMY_BASEURL}}/getNFTsForCollection?contractAddress=${{secrets.CONTRACT_ADDRESS}}&startToken=0&withMetadata=false
+          http_url: ${{secrets.ALCHEMY_BASEURL}}/getNFTsForCollection?contractAddress=${{secrets.CONTRACT_ADDRESS}}&startToken=0&withMetadata=true
           downloaded_filename: data/nftList.json
-          postprocess: ./data/postprocess.js
+          postprocess: data/postprocess.js
           mask: '["${{secrets.ALCHEMY_BASEURL}}"]'
