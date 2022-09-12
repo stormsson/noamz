@@ -15,12 +15,25 @@ const { ethers } = require("ethers");
 
 
 const getTxEvents = async (contract, address) => {
-  const result = await contract.filters.Transaction(address);
-  console.log(result);
+  const result = await contract.filters.Transfer(null, address);
+  console.log("TRANSFER: ", result);
   return result;
 }
 
 export async function getStaticProps(context) {
+
+  let savedMetadata = await import('../../data/metadata.json');
+
+  savedMetadata = Object.keys(savedMetadata.nft_metadata).sort().reduce(
+    (obj, key) => { 
+      obj[key] = savedMetadata.nft_metadata[key]; 
+      return obj;
+    }, 
+    {}
+);
+
+  // console.log("CRISTObal ordered", savedMetadata)
+
 
   const ALCHEMY_API_KEY = process.env.ALCHEMY_API_KEY;
   
@@ -32,6 +45,7 @@ export async function getStaticProps(context) {
 
   const ERC721ABI = [
       "function BM() public view returns(address)",
+      "event Transfer(address indexed from, address indexed to, uint256 indexed tokenId)"
   ]
 
   const BalanceManagerABI = [
@@ -51,19 +65,21 @@ export async function getStaticProps(context) {
   
   const MyBalance = await BMContract.balanceOf(process.env.MY_ADDRESS);
   const BMTotal = await BMContract.total();
-  const TXEvents = await getTxEvents(BMContract, myAddress)
+  const TXEvents = await getTxEvents(ERC721Contract, myAddress)
 
   // const txCount = await BMContract.transactionCountPerUser(process.env.MY_ADDRESS);
 
   // console.log("TXC ",txCount)
   // console.log("MyBalance: ", MyBalance.toString(),"TOTAL: ", BMTotal);
 
-  let currentDate = new Date();
-  let time = currentDate.getHours() + ":" + currentDate.getMinutes() + ":" + currentDate.getSeconds();
+  
 
+  // let NFTData = await getNFTData();
+  // let tmp = NFTData.nfts.filter((i) => { return (!('error' in i))  });
 
+  let tmp = savedMetadata;
 
-  let NFTData = await getNFTData();
+  // console.log(NFTData)
   let NFTOwners = await getNFTOwners();
   const burntTokens = NFTOwners.ownerAddresses.filter((i)=>{
     return i.ownerAddress == "0x0000000000000000000000000000000000000000"
@@ -81,23 +97,28 @@ export async function getStaticProps(context) {
     })
   }
 
-  let tmp = NFTData.nfts.filter((i) => { return (!('error' in i))  });
 
-  tmp = tmp.filter((i)=> {
-    const tokenId = i.id.tokenId;
-    return (!(tokenId in burntTokenIds));
-  })
+  // filter data from alchemy
+  // tmp = tmp.filter((i)=> {
+  //   const tokenId = i.id.tokenId;
+  //   return (!(tokenId in burntTokenIds));
+  // })
+  // NFTData.nfts = tmp;
+
+
+
   // console.log("POST ",tmp);
-  NFTData.nfts = tmp;
-  // console.log(NFTData);
+  // // console.log(NFTData);
 
+  let currentDate = new Date();
+  let time = currentDate.getHours() + ":" + currentDate.getMinutes() + ":" + currentDate.getSeconds();
 
   return {
     props: {
       'balance': parseFloat(MyBalance.toString()),
       'total': parseFloat(BMTotal.toString()),
       'time' : time,
-      NFTData
+      'NFTData': tmp,
     }, // will be passed to the page component as props
     revalidate: 3600, // seconds
   }
