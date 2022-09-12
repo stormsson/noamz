@@ -22,7 +22,7 @@ const getTxEvents = async (contract, address) => {
 
 export async function getStaticProps(context) {
 
-  let savedMetadata = await import('../../data/metadata.json');
+  let savedMetadata:any = await import('../../data/metadata.json');
 
   savedMetadata = Object.keys(savedMetadata.nft_metadata).sort().reduce(
     (obj, key) => { 
