@@ -5,6 +5,7 @@ on:
   workflow_dispatch: {}
   push:
     branches:
+      - dev
       - main      
     paths:
       - .github/workflows/flat.yml
@@ -36,3 +37,4 @@ jobs:
           vercel-token: ${{ secrets.VERCEL_DEPLOY_TOKEN }} # Required
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID}}  #Required
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID}} #Required 
+          mask: true
