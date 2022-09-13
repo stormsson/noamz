@@ -1,13 +1,11 @@
 name: data
 on:
   schedule:
-    - cron: 0 * * * *
+    - cron: 0 */4 * * *
   workflow_dispatch: {}
   push:
     branches:
-      - main
-      - dev
-      - flat-data
+      - main      
     paths:
       - .github/workflows/flat.yml
       - data/postprocess.js
@@ -32,3 +30,9 @@ jobs:
           downloaded_filename: data/nftList.json
           postprocess: data/postprocess.js
           mask: '["${{secrets.ALCHEMY_BASEURL}}"]'
+      - name: Trigger build
+        uses: amondnet/vercel-action@v19
+        with:
+          vercel-token: ${{ secrets.VERCEL_DEPLOY_TOKEN }} # Required
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID}}  #Required
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID}} #Required 
