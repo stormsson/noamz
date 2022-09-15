@@ -16,7 +16,7 @@ const { ethers } = require("ethers");
 
 const getTxEvents = async (contract, address) => {
   const result = await contract.filters.Transfer(null, address);
-  console.log("TRANSFER: ", result);
+  //console.log("TRANSFER: ", result);
   return result;
 }
 
