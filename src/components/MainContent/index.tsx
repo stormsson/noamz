@@ -50,8 +50,8 @@ import { AppProps } from "next/app";
 const formatDate = (formattedDate: Date) => {
 
     const monthNames = [
-        "January", "February", "March", "April", "May", "June",
-        "July", "August", "September", "October", "November", "December"
+        "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+        "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
     ];  
 
 
@@ -97,7 +97,7 @@ const MainContent = (props: IMainContentProps) => {
                     </div>
                     <div className={"column  is-one-third"}>
                         <div className={styles.columnitem}>
-                            Last time 
+                            Last update 
                             <div className={styles.importantvalue}>{formattedDate}</div>
                         </div>
 
