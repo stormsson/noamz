@@ -6,7 +6,7 @@ on:
   push:
     branches:
       - dev
-      - main      
+      - main
     paths:
       - .github/workflows/flat.yml
       - data/postprocess.js
@@ -32,9 +32,9 @@ jobs:
           postprocess: data/postprocess.js
           mask: '["${{secrets.ALCHEMY_BASEURL}}"]'
       - name: Trigger build
-        uses: amondnet/vercel-action@v19
+        uses: amondnet/vercel-action@20
         with:
-          vercel-token: ${{ secrets.VERCEL_DEPLOY_TOKEN }} # Required
-          vercel-org-id: ${{ secrets.VERCEL_ORG_ID}}  #Required
-          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID}} #Required 
-          mask: true
+          vercel-token: ${{ secrets.VERCEL_DEPLOY_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID}}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID}}
+          vercel-args: ${{ github.ref == 'refs/heads/main' && '--prod' || '' }}
